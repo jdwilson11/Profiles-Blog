@@ -1,0 +1,23 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+/bin
+/build
+
+# Gradle Files #
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Eclipse Files #
+.classpath
+.project
+.settings/
+/target/
+.springBeans
+
+# IntelliJ Files #
+.idea
+*.iml

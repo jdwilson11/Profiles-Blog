@@ -1,0 +1,33 @@
+// Copy formatter and compiler settings
+task copyEclipseSettings << {
+    copy {
+        from rootProject.file('gradle/eclipse.settings/')
+        include '*.prefs'
+        into file('.settings')
+    }
+}
+eclipseJdt.dependsOn copyEclipseSettings
+
+eclipse {
+    classpath {
+        downloadSources=true
+        downloadJavadoc=true
+        file {
+            // Classpath entry for Eclipse which changes the order of classpathentries; otherwise no sources for 3rd party jars are shown
+            withXml { xml ->
+                def node = xml.asNode()
+                node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+                node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+            }
+        }
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+    wtp {
+        facet {
+          facet name: 'jst.web', version: '3.1'
+          facet name: 'java', version: '1.8'
+          facet name: 'wst.jsdt.web', version: '1.0'
+        }
+    }
+}

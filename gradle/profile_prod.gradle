@@ -1,0 +1,9 @@
+dependencies {
+    // Start: Webserver
+    providedCompile 'org.springframework.boot:spring-boot-starter-tomcat'
+    // End: Webserver
+    
+    // Start: Database
+    compile 'mysql:mysql-connector-java:5.1.6'
+    // End: Database
+}

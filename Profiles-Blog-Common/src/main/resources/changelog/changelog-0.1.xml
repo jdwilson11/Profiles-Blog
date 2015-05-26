@@ -1,0 +1,22 @@
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+	http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	
+	<changeSet author="jwilson" id="create-payload-record-table">
+        <createTable tableName="PAYLOAD_RECORD">
+            <column name="PAYLOAD_TYPE" type="VARCHAR(32)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PAYLOAD_RECORD"/>
+            </column>
+            <column name="TIMES_SENT" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIMES_RECEIVED" type="INT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+</databaseChangeLog>

@@ -1,0 +1,65 @@
+subprojects {
+    // ----
+    // How to use Profiles with -P arguments
+    // ----
+    //
+    // Run gradle bootRun tasks with the -P argument to utilize a profile.
+    //
+    // For example, within a subproject's directory:
+    // gradle -Pdev bootRun
+    //
+    // Or, if in the parent project's directory,
+    // individual projects can be targeted using their name:
+    // gradle -Pdev Profiles-Blog-Sender:bootRun
+    
+    def prodProfiles='prod'
+    def devProfiles='dev'
+    def testProfiles='test'
+    def propertyDrivenProfiles;
+    
+    if (project.hasProperty('prod')) {
+        // Used for production environment
+        // Remote MySQL database
+        // Uses embedded Tomcat
+        propertyDrivenProfiles = prodProfiles
+        apply from: rootProject.file('gradle/profile_prod.gradle');
+        
+    } else if (project.hasProperty('dev')) {
+        // Used for local development
+        // Local MySQL database
+        // Uses embedded Tomcat
+        propertyDrivenProfiles = devProfiles
+        apply from: rootProject.file('gradle/profile_dev.gradle');
+    
+    } else {
+        // Default when no profile property is specified, used for testing
+        // Embedded H2 database
+        // Uses embedded Undertow instead of Tomcat for faster startup speeds
+        propertyDrivenProfiles = testProfiles
+        apply from: rootProject.file('gradle/profile_test.gradle');
+    }
+    println 'Using profile: "' + propertyDrivenProfiles + '" for ' + project.getName()
+    
+    // bootRun will rely on the -P profile argument, 
+    // defaulting to the "test" profile if no -P arguments are provided
+    bootRun {
+        systemProperties = [
+            'spring.profiles.active': propertyDrivenProfiles
+        ]
+        
+        // Use -Pproperty.name=value in addition to a -P profile argument
+        // for each property below to pass database connection properties.
+        // 
+        // These will only be used if profile specific property files do not override them.
+        // They are intended for use with the "prod" profile.
+        ext.applyPropertyIfExists = { propertyKey ->
+            if(project.hasProperty(propertyKey)) {
+                systemProperties[propertyKey] = project.getProperty(propertyKey)
+            }
+        }
+        applyPropertyIfExists('spring.datasource.url')
+        applyPropertyIfExists('spring.datasource.username')
+        applyPropertyIfExists('spring.datasource.password')
+    }
+
+}

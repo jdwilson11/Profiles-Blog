@@ -1,0 +1,7 @@
+description = 'Profiles-Blog-Common'
+
+jar {
+    baseName = 'Profiles-Blog-Common'
+    version = '0.0.1-SNAPSHOT'
+    mainClassName = 'org.jdw.blog.CommonMain'
+}

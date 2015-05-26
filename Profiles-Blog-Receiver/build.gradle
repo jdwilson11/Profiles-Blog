@@ -1,0 +1,19 @@
+description = 'Profiles-Blog-Receiver'
+
+apply plugin: 'war'
+
+war {
+    baseName = 'Profiles-Blog-Receiver'
+    version = '0.0.1-SNAPSHOT'
+}
+
+dependencies {
+    compile project(':Profiles-Blog-Common')
+}
+
+// Ensure each project uses a different remote debug port
+def remoteDebugPort = '5002'
+
+if (!project.hasProperty('prod')) {
+    bootRun.jvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=" + remoteDebugPort]
+}

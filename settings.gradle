@@ -1,0 +1,5 @@
+rootProject.name = 'Profiles-Blog'
+
+include 'Profiles-Blog-Common'
+include 'Profiles-Blog-Sender'
+include 'Profiles-Blog-Receiver'
