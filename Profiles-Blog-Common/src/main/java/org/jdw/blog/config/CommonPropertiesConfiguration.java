@@ -20,14 +20,6 @@ public class CommonPropertiesConfiguration extends PropertiesConfiguration {
     }
 
     @Bean
-    @Profile(Profiles.LOCAL)
-    public static PropertySourcesPlaceholderConfigurer localProperties() {
-        return createPropertySourcesPlaceholderConfigurer(
-                "common_application.properties",
-                "common_local_application.properties");
-    }
-
-    @Bean
     @Profile(Profiles.DEV)
     public static PropertySourcesPlaceholderConfigurer devProperties() {
         return createPropertySourcesPlaceholderConfigurer(
