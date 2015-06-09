@@ -67,6 +67,11 @@ subprojects {
         compile 'org.apache.commons:commons-lang3:3.4'
         // End: Apache Commons
     }
+    
+    bootRun {
+        // Ensures IntelliJ can load resource files
+        addResources = false
+    }
 }
 
 apply from: rootProject.file('gradle/profiles.gradle');
