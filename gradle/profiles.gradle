@@ -61,5 +61,20 @@ subprojects {
         applyPropertyIfExists('spring.datasource.username')
         applyPropertyIfExists('spring.datasource.password')
     }
+    
+    // Alternative to using the extended bootRun task above to set properties.
+    // Comment out the bootRun task extension above (lines 45 to 63) and un-comment this task (lines 72 to 78) to try it.
+    // 
+    // Appends properties to each subproject's application.properties file during compilation,
+    // which ensures WARs and JARs always run with the profiles they were built with.
+    // Also works with the bootRun task without requiring it to be extended.
+    // Defaults to the "test" profile if no -P arguments are provided.
+    // classes << {
+    //     println 'Adding spring.profiles.active=' + propertyDrivenProfiles + ' to application.properties'
+    //     FileTree tree = fileTree(dir: "build/resources/main").include("application.properties")
+    //     tree.each { File file ->
+    //         file.append('\nspring.profiles.active=' + propertyDrivenProfiles);
+    //     }
+    // }
 
 }
