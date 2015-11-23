@@ -66,6 +66,10 @@ subprojects {
         // Start: Apache Commons
         compile 'org.apache.commons:commons-lang3:3.4'
         // End: Apache Commons
+        
+        // Start: Spring Boot Actuator
+        compile 'org.springframework.boot:spring-boot-starter-actuator'
+        // End: Spring Boot Actuator
     }
     
     bootRun {
