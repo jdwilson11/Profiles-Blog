@@ -8,10 +8,6 @@ war {
 }
 
 dependencies {
-    // Start: Spring Boot Web
-    compile('org.springframework.boot:spring-boot-starter-web') {
-        exclude module: 'spring-boot-starter-tomcat'
-    }
     compile project(':Profiles-Blog-Common')
 }
 
