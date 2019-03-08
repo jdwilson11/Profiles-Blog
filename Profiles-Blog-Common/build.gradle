@@ -1,4 +1,5 @@
 description = 'Profiles-Blog-Common'
+apply plugin: 'application'
 
 jar {
     baseName = 'Profiles-Blog-Common'
