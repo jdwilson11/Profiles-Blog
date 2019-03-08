@@ -21,3 +21,4 @@
 # IntelliJ Files #
 .idea
 *.iml
+/.nb-gradle/
