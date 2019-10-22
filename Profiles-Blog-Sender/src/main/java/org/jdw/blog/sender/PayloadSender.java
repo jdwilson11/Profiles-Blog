@@ -1,5 +1,6 @@
 package org.jdw.blog.sender;
 
+import org.springframework.beans.factory.annotation.Value;
 import java.util.Arrays;
 
 import javax.annotation.PostConstruct;
@@ -20,8 +21,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 public class PayloadSender {
 
     private RestTemplate restTemplate;
+    
+    @Value("${sender.target.hostport}")
+    private String serverHostPort;
 
-    @PostConstruct
+
+	@PostConstruct
     public void initialize() {
         restTemplate = new RestTemplate();
 
@@ -48,10 +53,18 @@ public class PayloadSender {
         // Rudimentary destination hard-coding
         // Only sends to a local receiver
         // Receiver's port taken from Profiles-Blog-Receiver's application.properties
-        String url = "http://localhost:9002/receive";
+        String url = "http://"+serverHostPort+"/receive";
 
         // Invoke the endpoint in the Profiles-Blog-Receiver project
         restTemplate.postForEntity(url, payload, Void.class);
     }
+    
+    public String getServerHostPort() {
+		return serverHostPort;
+	}
+
+	public void setServerHostPort(String serverHostPort) {
+		this.serverHostPort = serverHostPort;
+	}
 
 }

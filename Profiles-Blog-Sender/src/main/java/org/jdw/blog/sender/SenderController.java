@@ -21,7 +21,7 @@ public class SenderController {
         return sendCountService.incrementSendCount(payloadType);
     }
 
-    @RequestMapping("/{payloadType}/count")
+    @RequestMapping("/sender/{payloadType}/count")
     public SendCount findSendCount(@PathVariable("payloadType") PayloadType payloadType) {
         return sendCountService.findSendCount(payloadType);
     }

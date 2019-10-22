@@ -20,7 +20,7 @@ public class ReceiverController {
         receiveCountService.incrementReceiveCount(payload.getPayloadType());
     }
 
-    @RequestMapping("/{payloadType}/count")
+    @RequestMapping("/receiver/{payloadType}/count")
     public ReceiveCount findReceiveCount(@PathVariable("payloadType") PayloadType payloadType) {
         return receiveCountService.findReceiveCount(payloadType);
     }

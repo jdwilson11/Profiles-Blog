@@ -15,6 +15,9 @@ gradle -Pdev bootRun
 Or, if in the parent project's directory, individual projects can be targeted using their name:  
 gradle -Pdev Profiles-Blog-Sender:bootRun
 
+You can also run all subprojects in a monolithic stack of the app with:  
+gradle -Ptest Profiles-Blog-Monolithic:bootRun
+
 See common\_test\_application.properties and common\_dev\_application.properties for information about where each database is located.
 
 The prod profile requires database credentials to be passed using -P arguments as follows:  
@@ -26,13 +29,13 @@ http://localhost:9001/TEST1/send
 Sends a payload of the type specified in the URL to the Profiles-Blog-Sender project.  
 Sample Response" {"payloadType":"TEST1","timesSent":1}
 
-http://localhost:9001/TEST1/count  
+http://localhost:9001/sender/TEST1/count  
 Displays the current number of times the specified payload type has been sent.  
 Sample Response: {"payloadType":"TEST1","timesSent":1}
 
 **Profiles-Blog-Receiver supports one HTTP GET command:**
 
-http://localhost:9002/TEST1/count  
+http://localhost:9002/receiver/TEST1/count  
 Displays the current number of times the specified payload type has been received.  
 Sample Response: {"payloadType":"TEST1","timesReceived":1}
 
